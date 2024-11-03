@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _isGameOver = true;
-        FruitSpwanner.FruitInstance.GameOver();
+        ItemSpawner.Instance.GameOver();
         PowerUpManager.Instance.GameOver();
     }
 

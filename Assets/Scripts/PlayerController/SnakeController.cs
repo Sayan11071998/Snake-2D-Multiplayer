@@ -21,7 +21,7 @@ public class SnakeController : MonoBehaviour
 
     private Vector3 _direction;
     private Rigidbody2D _rigidBody2d;
-    private AudioController _audio;
+    private AudioContoller _audio;
     private List<Transform> _segments;
     private float _moveTimer = 0;
     private bool _isVertical, _isPaused, _isImmune;
@@ -32,7 +32,7 @@ public class SnakeController : MonoBehaviour
     private void Start()
     {
         _rigidBody2d = GetComponent<Rigidbody2D>();
-        _audio = GetComponent<AudioController>();
+        _audio = GetComponent<AudioContoller>();
         _rigidBody2d.bodyType = RigidbodyType2D.Kinematic;
         _isPaused = false;
 
@@ -42,7 +42,8 @@ public class SnakeController : MonoBehaviour
 
     private void Update()
     {
-        if (_isPaused || GameManagerDependencyInfo.ManagerInstance.isGameOver)
+        // if (_isPaused || GameManagerDependencyInfo.ManagerInstance.isGameOver)
+        if (_isPaused || GameManager.Instance._isGameOver)
             return;
 
         GetSnakeDirection();
@@ -136,7 +137,7 @@ public class SnakeController : MonoBehaviour
 
     private void MoveSnake()
     {
-        float effectiveSnakeSpeed = _snakeSpeed * ((_powerUp[(int)PowerUps.speedUp]) ? 3 : 1);
+        float effectiveSnakeSpeed = _snakeSpeed * ((_powerUp[(int)PowerUpTypes.speedUp]) ? 3 : 1);
 
         if (_moveTimer > 1 / effectiveSnakeSpeed)
         {
@@ -190,149 +191,149 @@ public class SnakeController : MonoBehaviour
             else
                 continue;
 
-            float powerUpTimePeriod = PowerUpManager.powerUpInstance.getPowerUpPeriod((PowerUps)i);
+            float powerUpTimePeriod = PowerUpManager.Instance.getPowerUpPeriod((PowerUpTypes)i);
 
             if (_powerUpTimer[i] > powerUpTimePeriod)
             {
                 _powerUp[i] = false;
-                UIManager.UiInstance.PowerUp(player, (PowerUps)i, false);
+                UIManager.Instance.PowerUp(player, (PowerUpTypes)i, false);
                 _powerUpTimer[i] = 0;
             }
         }
     }
 
-    // IEnumerator DeathAnimation()
-    // {
-    //     m_Paused = true;
-    //     float waitTime = 0.1f;
-    //     for (int i = m_body.Count - 1; i > 0; i--)
-    //     {
-    //         Destroy(m_body[i].gameObject, waitTime);
-    //         waitTime += 0.05f;
-    //     }
-    //     yield return new WaitForSeconds(waitTime);
-    //     m_body.Clear();
-    //     UIManager.UiInstance.GameOver(player);
-    //     Destroy(this.gameObject);
-    // }
+    IEnumerator DeathAnimation()
+    {
+        _isPaused = true;
+        float waitTime = 0.1f;
 
-    // private void DestoryLastBody()
-    // {
-    //     Destroy(m_body[m_body.Count - 1].gameObject);
-    //     m_body.RemoveAt(m_body.Count - 1);
-    //     SetScale();
-    // }
+        for (int i = _segments.Count - 1; i > 0; i--)
+        {
+            Destroy(_segments[i].gameObject, waitTime);
+            waitTime += 0.05f;
+        }
 
-    // private void UpdateScore(float fruitScore)
-    // {
-    //     m_score += fruitScore;
-    //     UIManager.UiInstance.SetScoreUI(player, m_score);
-    // }
+        yield return new WaitForSeconds(waitTime);
 
-    // private void AteFruit()
-    // {
-    //     m_Audio.Play(Sounds.Eat);
-    //     int count = FruitSpwanner.FruitInstance.SnakeAteFruit() * ((m_PowerUp[(int)PowerUps.scoreUp]) ? 2 : 1);
-    //     for (int i = 0; i < count; i++)
-    //     {
-    //         AddNewBodyPart();
-    //     }
-    //     if (m_body.Count > 3)
-    //         FruitSpwanner.FruitInstance.PoisonActivation(true);
+        _segments.Clear();
+        UIManager.Instance.GameOver(player);
+        Destroy(gameObject);
+    }
 
-    //     UpdateScore(FruitSpwanner.FruitInstance.fruitScore * ((m_PowerUp[(int)PowerUps.scoreUp]) ? 2 : 1));
-    // }
+    private void DestoryLastBody()
+    {
+        Destroy(_segments[_segments.Count - 1].gameObject);
+        _segments.RemoveAt(_segments.Count - 1);
+        SetScale();
+    }
 
-    // private void AtePoison()
-    // {
-    //     m_Audio.Play(Sounds.Poison);
-    //     int count = FruitSpwanner.FruitInstance.SnakeAtePoison();
-    //     if (m_body.Count < count + 1)
-    //     {
-    //         m_Audio.Play(Sounds.Death);
-    //         StartCoroutine(DeathAnimation());
-    //         GameManager.ManagerInstance.GameOver();
-    //     }
-    //     for (int i = 0; i < count; i++)
-    //     {
-    //         DestoryLastBody();
-    //     }
-    //     if (m_body.Count < 3)
-    //         FruitSpwanner.FruitInstance.PoisonActivation(false);
+    private void UpdateScore(float fruitScore)
+    {
+        _score += fruitScore;
+        UIManager.Instance.SetScoreUI(player, _score);
+    }
 
-    //     UpdateScore(-FruitSpwanner.FruitInstance.poisonScore);
-    // }
+    private void AteFruit()
+    {
+        _audio.Play(Sounds.Eat);
+        int count = ItemSpawner.Instance.SnakeAteFruit() * ((_powerUp[(int)PowerUpTypes.scoreUp]) ? 2 : 1);
 
-    // private void AteBody()
-    // {
-    //     if (m_immunity)
-    //         return;
+        for (int i = 0; i < count; i++)
+            AddNewSegments();
 
-    //     if (m_PowerUp[(int)PowerUps.shield])
-    //     {
-    //         m_PowerUp[(int)PowerUps.shield] = false;
-    //         UIManager.UiInstance.PowerUp(player, PowerUps.shield, false);
-    //         StartCoroutine(SetImmunity(1));
-    //         return;
-    //     }
-    //     m_Audio.Play(Sounds.Death);
-    //     Debug.Log("Player Dead");
-    //     StartCoroutine(DeathAnimation());
-    //     GameManager.ManagerInstance.GameOver();
-    // }
+        if (_segments.Count > 3)
+            ItemSpawner.Instance.PoisonActivation(true);
 
-    // private void AteHead()
-    // {
-    //     GameManager.ManagerInstance.Draw();
-    //     UIManager.UiInstance.Draw();
-    // }
+        UpdateScore(ItemSpawner.Instance.fruitScore * ((_powerUp[(int)PowerUpTypes.scoreUp]) ? 2 : 1));
+    }
 
-    // public void ActivatePowerUp(PowerUps power, GameObject powerObject)
-    // {
-    //     m_Audio.Play(Sounds.Eat);
-    //     Destroy(powerObject);
-    //     UIManager.UiInstance.PowerUp(player, power, true);
-    //     m_PowerUp[(int)power] = true;
-    // }
+    private void AtePoison()
+    {
+        _audio.Play(Sounds.Poison);
 
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("Fruit"))
-    //     {
-    //         AteFruit();
-    //         return;
-    //     }
+        int count = ItemSpawner.Instance.SnakeAtePoison();
 
-    //     if (other.CompareTag("Poison"))
-    //     {
-    //         Destroy(other.gameObject);
-    //         AtePoison();
-    //         return;
-    //     }
+        if (_segments.Count < count + 1)
+        {
+            _audio.Play(Sounds.Death);
+            StartCoroutine(DeathAnimation());
+            GameManager.Instance.GameOver();
+        }
 
-    //     if (other.CompareTag("Head"))
-    //     {
-    //         AteHead();
-    //         return;
-    //     }
+        for (int i = 0; i < count; i++)
+            DestoryLastBody();
 
-    //     if (other.CompareTag("Body"))
-    //     {
-    //         AteBody();
-    //         return;
-    //     }
+        if (_segments.Count < 3)
+            ItemSpawner.Instance.PoisonActivation(false);
 
-    //     if (other.CompareTag("Shield"))
-    //     {
-    //         ActivatePowerUp(PowerUps.shield, other.gameObject);
-    //     }
-    //     else if (other.CompareTag("ScoreUp"))
-    //     {
-    //         ActivatePowerUp(PowerUps.scoreUp, other.gameObject);
-    //     }
-    //     else if (other.CompareTag("SpeedUp"))
-    //     {
-    //         ActivatePowerUp(PowerUps.speedUp, other.gameObject);
-    //     }
-    // }
+        UpdateScore(-ItemSpawner.Instance.poisonScore);
+    }
+
+    private void AteBody()
+    {
+        if (_isImmune)
+            return;
+
+        if (_powerUp[(int)PowerUpTypes.shield])
+        {
+            _powerUp[(int)PowerUpTypes.shield] = false;
+            UIManager.Instance.PowerUp(player, PowerUpTypes.shield, false);
+            StartCoroutine(SetImmunity(1));
+            return;
+        }
+
+        _audio.Play(Sounds.Death);
+        Debug.Log("Player Dead");
+        StartCoroutine(DeathAnimation());
+        GameManager.Instance.GameOver();
+    }
+
+    private void AteHead()
+    {
+        GameManager.Instance.Draw();
+        UIManager.Instance.Draw();
+    }
+
+    public void ActivatePowerUp(PowerUpTypes power, GameObject powerObject)
+    {
+        _audio.Play(Sounds.Eat);
+        Destroy(powerObject);
+        UIManager.Instance.PowerUp(player, power, true);
+        _powerUp[(int)power] = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Fruit"))
+        {
+            AteFruit();
+            return;
+        }
+
+        if (other.CompareTag("Poison"))
+        {
+            Destroy(other.gameObject);
+            AtePoison();
+            return;
+        }
+
+        if (other.CompareTag("Head"))
+        {
+            AteHead();
+            return;
+        }
+
+        if (other.CompareTag("Body"))
+        {
+            AteBody();
+            return;
+        }
+
+        if (other.CompareTag("Shield"))
+            ActivatePowerUp(PowerUpTypes.shield, other.gameObject);
+        else if (other.CompareTag("ScoreUp"))
+            ActivatePowerUp(PowerUpTypes.scoreUp, other.gameObject);
+        else if (other.CompareTag("SpeedUp"))
+            ActivatePowerUp(PowerUpTypes.speedUp, other.gameObject);
+    }
 }
