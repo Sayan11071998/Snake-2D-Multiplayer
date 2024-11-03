@@ -352,6 +352,10 @@ PrefabInstance:
       value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: player
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: downKey
       value: 115
       objectReference: {fileID: 0}
@@ -363,6 +367,10 @@ PrefabInstance:
       propertyPath: rightKey
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: _snakeSegment
+      value: 
+      objectReference: {fileID: 7174606913641072160, guid: d7814328a3d75704fb9f0087320b49e7, type: 3}
     - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: _snakeSegments
       value: 
