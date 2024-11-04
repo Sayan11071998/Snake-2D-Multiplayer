@@ -159,8 +159,7 @@ public class SnakeController : MonoBehaviour
     }
 
     private void CheckBoundary(ref Vector3 pos)
-    { 
-        //Bounds Bounds = GameManager.managerInstance.GetBounds(); 
+    {
         if(pos.x > Bounds.maxX || pos.x < Bounds.minX)
             pos.x =((pos.x > 0)?Bounds.minX:Bounds.maxX);
         else if(pos.y > Bounds.maxY || pos.y < Bounds.minY)

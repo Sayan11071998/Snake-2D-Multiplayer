@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
     public Image[] score;
     public Image[] speed;
     public TMP_Text[] player1Score;
-    //public Text player2Score;
 
     [Space]
     public GameObject GameOverPanel;
