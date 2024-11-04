@@ -6,6 +6,11 @@ TagManager:
   tags:
   - SnakeHead
   - SnakeSegments
+  - Fruit
+  - Poison
+  - Shield
+  - ScoreUp
+  - SpeedUp
   layers:
   - Default
   - TransparentFX

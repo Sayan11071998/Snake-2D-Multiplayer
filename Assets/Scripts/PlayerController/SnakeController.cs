@@ -317,13 +317,13 @@ public class SnakeController : MonoBehaviour
             return;
         }
 
-        if (other.CompareTag("Head"))
+        if (other.CompareTag("SnakeHead"))
         {
             AteHead();
             return;
         }
 
-        if (other.CompareTag("Body"))
+        if (other.CompareTag("SnakeSegments"))
         {
             AteBody();
             return;
