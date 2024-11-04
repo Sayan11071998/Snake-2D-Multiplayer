@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 9048860450564362992, guid: e6bc0f2537cfb7347b3a5d89be2727bf, type: 3}
-  shieldDuration: 5
-  scoreBoost: {fileID: 180209395085946877, guid: e9e986c4bf59def4ea7adb62e64cfa3f, type: 3}
-  scoreDuration: 15
+  shieldPeriod: 10
+  scoreUp: {fileID: 180209395085946877, guid: e9e986c4bf59def4ea7adb62e64cfa3f, type: 3}
+  scorePeriod: 10
   speedUp: {fileID: 5732424659710972996, guid: e88251bf8ffb04f41b8c9f114bea8483, type: 3}
-  speedUpDuration: 10
-  spawnInterval: 15
+  speedPeriod: 10
+  SpawnInterval: 5
   timeout: 5
-  activeTime: 10
+  aliveTime: 10

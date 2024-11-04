@@ -247,10 +247,10 @@ MonoBehaviour:
   speed:
   - {fileID: 74758388}
   - {fileID: 124141010}
-  playerScore:
+  player1Score:
   - {fileID: 1951512517}
   - {fileID: 1281154451}
-  gameOverPanel: {fileID: 889439966}
+  GameOverPanel: {fileID: 889439966}
   gameOverText: {fileID: 510662444}
 --- !u!1 &74758386
 GameObject:
@@ -1130,6 +1130,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 368288393}
     - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: upKey
       value: 273
       objectReference: {fileID: 0}
@@ -1146,8 +1150,20 @@ PrefabInstance:
       value: 276
       objectReference: {fileID: 0}
     - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: bodyPart
+      value: 
+      objectReference: {fileID: 7174606913641072160, guid: d7814328a3d75704fb9f0087320b49e7, type: 3}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: rightKey
       value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: rightkey
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: initialBodyCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8772519800949379537, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1216,7 +1232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &889439967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1497,8 +1513,8 @@ MonoBehaviour:
   - {fileID: 0}
   score: []
   speed: []
-  playerScore: []
-  gameOverPanel: {fileID: 0}
+  player1Score: []
+  GameOverPanel: {fileID: 0}
   gameOverText: {fileID: 0}
 --- !u!1 &1032801580
 GameObject:
@@ -2399,6 +2415,14 @@ PrefabInstance:
       propertyPath: UI
       value: 
       objectReference: {fileID: 210506406}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938762170947969864, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
+      propertyPath: initialBodyCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8772519800949379537, guid: 903f820c44954f34b975860a97a51ef2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.62
@@ -2553,6 +2577,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: fruit
+      value: 
+      objectReference: {fileID: 4770517565515169568, guid: 63926e35fd442fc4398352f5c641c376, type: 3}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: fruitValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: poisonValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: poisonPrefab
+      value: 
+      objectReference: {fileID: 2142574163392667929, guid: 5768cdb3567e2f9418a15a2666d795a8, type: 3}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: poisonStayTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
+      propertyPath: poisonSpawnInterval
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2569,6 +2617,10 @@ PrefabInstance:
     - target: {fileID: 4871563795337324043, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070628877909718950, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
+      propertyPath: isGameOver
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9138719263504878343, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
       propertyPath: m_LocalPosition.x

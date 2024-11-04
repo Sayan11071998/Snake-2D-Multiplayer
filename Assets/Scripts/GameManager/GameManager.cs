@@ -1,38 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
+    private static GameManager s_ManagerInstance;
+    public static GameManager ManagerInstance { get { return s_ManagerInstance; } }
 
-    public bool _isGameOver;
+    public bool isGameOver;
 
-    private BoxCollider2D _boxCollider2D;
+    private BoxCollider2D m_collider;
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        _isGameOver = false;
-        _boxCollider2D = GetComponent<BoxCollider2D>();
-
+        isGameOver = false;
+        s_ManagerInstance = this;
+        m_collider = GetComponent<BoxCollider2D>();
         SetBounds();
-        DisplayBounds();
+        displayBounds();
+    }
+
+    private void displayBounds()
+    {
+        Debug.Log("Bounds maxX : " + Bounds.maxX);
+        Debug.Log("Bounds minX : " + Bounds.minX);
+        Debug.Log("Bounds maxY : " + Bounds.maxY);
+        Debug.Log("Bounds minY : " + Bounds.minY);
     }
 
     private void SetBounds()
     {
-        Vector2 offset = _boxCollider2D.offset;
-        Vector2 size = _boxCollider2D.size;
+        Vector2 offset = m_collider.offset;
+        Vector2 size = m_collider.size;
         Vector2 pos = transform.position;
 
         Bounds.maxX = pos.x + (size.x / 2) + offset.x;
@@ -42,23 +41,15 @@ public class GameManager : MonoBehaviour
         Bounds.minY = pos.y - (size.y / 2) + offset.y;
     }
 
-    private void DisplayBounds()
-    {
-        Debug.Log("Bounds maxX : " + Bounds.maxX);
-        Debug.Log("Bounds minX : " + Bounds.minX);
-        Debug.Log("Bounds maxY : " + Bounds.maxY);
-        Debug.Log("Bounds minY : " + Bounds.minY);
-    }
-
     public void GameOver()
     {
-        _isGameOver = true;
-        ItemSpawner.Instance.GameOver();
-        PowerUpManager.Instance.GameOver();
+        isGameOver = true;
+        ItemSpwanner.FruitInstance.GameOver();
+        PowerUpManager.powerUpInstance.GameOver();
     }
 
     public void Draw()
     {
-        _isGameOver = true;
+        isGameOver = true;
     }
 }

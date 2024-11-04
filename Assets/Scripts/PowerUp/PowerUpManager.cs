@@ -2,82 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerUps
+{
+    shield = 0,
+    scoreUp = 1,
+    speedUp = 2
+}
+
 public class PowerUpManager : MonoBehaviour
 {
-    private static PowerUpManager instance;
-    public static PowerUpManager Instance { get { return instance; } }
+    private static PowerUpManager s_PowerUpInstance;
+    public static PowerUpManager powerUpInstance { get { return s_PowerUpInstance; } }
 
     [Header("Shield")]
     public GameObject shield;
-    public float shieldDuration;
+    public float shieldPeriod;
 
-    [Header("Score Boost")]
-    public GameObject scoreBoost;
-    public float scoreDuration;
+    [Header("Score UP")]
+    public GameObject scoreUp;
+    public float scorePeriod;
 
     [Header("Speed UP")]
     public GameObject speedUp;
-    public float speedUpDuration;
+    public float speedPeriod;
 
-    [Header("Power Ups Details")]
-    public float spawnInterval;
+    [Header("Other")]
+    public float SpawnInterval;
     public float timeout;
-    public float activeTime;
+    public float aliveTime;
 
-    private float _timer;
+    private float m_Timer;
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        s_PowerUpInstance = this;
     }
 
     void Update()
     {
-        if (GameManager.Instance._isGameOver)
+        if (GameManager.ManagerInstance.isGameOver)
             return;
 
-        if (_timer > spawnInterval)
-            SpawnRandomPowerUps();
-        _timer += Time.deltaTime;
+        if (m_Timer > SpawnInterval)
+            SpawnRandomPowerUp();
+        m_Timer += Time.deltaTime;
     }
 
-    private void SpawnRandomPowerUps()
+    private void SpawnRandomPowerUp()
     {
         int index = Random.Range(0, 3);
-        GameObject newPower = (index == 0) ? shield : (index == 2) ? scoreBoost : speedUp;
+        GameObject newPower = (index == 0) ? shield : (index == 2) ? scoreUp : speedUp;
 
         newPower = Instantiate<GameObject>(newPower);
-        newPower.transform.position = GetRandomPosition();
+        newPower.transform.position = GetRandomPos();
         newPower.transform.parent = transform;
-        Destroy(newPower, activeTime);
-        _timer = 0;
+        Destroy(newPower, aliveTime);
+        m_Timer = 0;
     }
 
-    private Vector3 GetRandomPosition()
+    private Vector3 GetRandomPos()
     {
-        Vector3 position;
-        position.x = Mathf.Round(Random.Range(Bounds.minX, Bounds.maxX));
-        position.y = Mathf.Round(Random.Range(Bounds.minY, Bounds.maxY));
-        position.z = 0;
-        return position;
+        Vector3 pos;
+        pos.x = Mathf.Round(Random.Range(Bounds.minX, Bounds.maxX));
+        pos.y = Mathf.Round(Random.Range(Bounds.minY, Bounds.maxY));
+        pos.z = 0;
+        return pos;
     }
 
-    public float getPowerUpPeriod(PowerUpTypes power)
+    public float getPowerUpPeriod(PowerUps power)
     {
-        if (PowerUpTypes.shield == power)
-            return shieldDuration;
-        else if (PowerUpTypes.scoreUp == power)
-            return scoreDuration;
+        if (PowerUps.shield == power)
+            return shieldPeriod;
+        else if (PowerUps.scoreUp == power)
+            return scorePeriod;
         else
-            return speedUpDuration;
+            return speedPeriod;
     }
 
     public void GameOver()
@@ -87,11 +86,4 @@ public class PowerUpManager : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
     }
-}
-
-public enum PowerUpTypes
-{
-    shield,
-    scoreUp,
-    speedUp
 }

@@ -17,12 +17,12 @@ public class AudioContoller : MonoBehaviour
     public AudioClip poison;
     public AudioClip death;
 
-    private AudioSource _audioSource;
+    private AudioSource m_Source;
 
     void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.playOnAwake = false;
+        m_Source = GetComponent<AudioSource>();
+        m_Source.playOnAwake = false;
     }
 
     public void Play(Sounds sound)
@@ -30,17 +30,16 @@ public class AudioContoller : MonoBehaviour
         switch (sound)
         {
             case Sounds.Eat:
-                _audioSource.clip = eat;
+                m_Source.clip = eat;
                 break;
             case Sounds.Poison:
-                _audioSource.clip = poison;
+                m_Source.clip = poison;
                 break;
             case Sounds.Death:
-                _audioSource.clip = death;
+                m_Source.clip = death;
                 break;
         }
-
-        _audioSource.pitch = Random.Range(0.95f, 1.1f);
-        _audioSource.Play();
+        m_Source.pitch = Random.Range(0.95f, 1.1f);
+        m_Source.Play();
     }
 }

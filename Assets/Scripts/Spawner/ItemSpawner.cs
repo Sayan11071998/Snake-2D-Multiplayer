@@ -2,100 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSpawner : MonoBehaviour
+public class ItemSpwanner : MonoBehaviour
 {
-    private static ItemSpawner instance;
-    public static ItemSpawner Instance { get { return instance; } }
+    private static ItemSpwanner s_FruitInstance;
+    public static ItemSpwanner FruitInstance { get { return s_FruitInstance; } }
 
-    [Header("Fruit Item")]
-    public Transform fruitPrefab;
+    [Header("Fruit")]
+    public Transform fruit;
     public int fruitValue;
     public float fruitSpawnInterval;
     public float fruitScore;
 
-    [Header("Poison Iteam")]
+    [Header("Poison")]
     public Transform poisonPrefab;
     public int poisonValue;
     public float poisonSpawnInterval;
-    public float poisonEffectTime;
+    public float poisonStayTime;
     public float poisonScore;
 
-    private float[] _spawnTimer = new float[2];
-    private bool _isPosionEnable = false;
+    private float[] m_SpawnTimer = new float[2];
+    private bool m_PosionEnable = false;
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
+        s_FruitInstance = this;
         IntitializeFruit();
-    }
-
-    void Update()
-    {
-        if (GameManager.Instance._isGameOver)
-            return;
-
-        SpawnItems();
     }
 
     private void IntitializeFruit()
     {
-        fruitPrefab = Instantiate(fruitPrefab.gameObject).transform;
-        fruitPrefab.GetComponent<BoxCollider2D>().enabled = true;
-        fruitPrefab.parent = transform;
+        fruit = Instantiate(fruit.gameObject).transform;
+        fruit.GetComponent<BoxCollider2D>().enabled = true;
+        fruit.parent = transform;
     }
 
-    private void SpawnItems()
+    void Update()
     {
-        if (_spawnTimer[0] > fruitSpawnInterval)
-            SpawnNextFruit();
-        _spawnTimer[0] += Time.deltaTime;
-
-        if (!_isPosionEnable)
+        if (GameManager.ManagerInstance.isGameOver)
             return;
 
-        if (_spawnTimer[1] > poisonSpawnInterval)
+        Spawn();
+    }
+
+    private void Spawn()
+    {
+        if (m_SpawnTimer[0] > fruitSpawnInterval)
+        {
+            SpawnNextFruit();
+        }
+        m_SpawnTimer[0] += Time.deltaTime;
+
+        if (!m_PosionEnable)
+            return;
+
+        if (m_SpawnTimer[1] > poisonSpawnInterval)
+        {
             SpawnNextPoison();
-        _spawnTimer[1] += Time.deltaTime;
-    }
-
-    public void SpawnNextFruit()
-    {
-        Vector3 newPos = GetRandomPosition();
-        fruitPrefab.position = newPos;
-        _spawnTimer[0] = 0;
-    }
-
-    private void SpawnNextPoison()
-    {
-        Vector3 newPosition = GetRandomPosition();
-        GameObject poisonInstance = Instantiate(poisonPrefab, newPosition, Quaternion.identity).gameObject;
-        poisonInstance.transform.parent = transform;
-        Destroy(poisonInstance, poisonEffectTime);
-        _spawnTimer[1] = 0;
-    }
-
-    private Vector3 GetRandomPosition()
-    {
-        Vector3 pos;
-        pos.x = Mathf.Round(Random.Range(Bounds.minX, Bounds.maxX));
-        pos.y = Mathf.Round(Random.Range(Bounds.minY, Bounds.maxY));
-        pos.z = 0;
-        return pos;
-    }
-
-    public int SnakeAteFruit()
-    {
-        SpawnNextFruit();
-        return fruitValue;
+        }
+        m_SpawnTimer[1] += Time.deltaTime;
     }
 
     public int SnakeAtePoison()
@@ -104,10 +68,41 @@ public class ItemSpawner : MonoBehaviour
         return poisonValue;
     }
 
+    private void SpawnNextPoison()
+    {
+        Vector3 newPos = GetRandomPos();
+        GameObject poisonInstance = Instantiate(poisonPrefab, newPos, Quaternion.identity).gameObject;
+        poisonInstance.transform.parent = transform;
+        Destroy(poisonInstance, poisonStayTime);
+        m_SpawnTimer[1] = 0;
+    }
+
+    public int SnakeAteFruit()
+    {
+        SpawnNextFruit();
+        return fruitValue;
+    }
+
+    public void SpawnNextFruit()
+    {
+        Vector3 newPos = GetRandomPos();
+        fruit.position = newPos;
+        m_SpawnTimer[0] = 0;
+    }
+
     public void PoisonActivation(bool value)
     {
         poisonPrefab.gameObject.SetActive(value);
-        _isPosionEnable = value;
+        m_PosionEnable = value;
+    }
+
+    private Vector3 GetRandomPos()
+    {
+        Vector3 pos;
+        pos.x = Mathf.Round(Random.Range(Bounds.minX, Bounds.maxX));
+        pos.y = Mathf.Round(Random.Range(Bounds.minY, Bounds.maxY));
+        pos.z = 0;
+        return pos;
     }
 
     public void GameOver()

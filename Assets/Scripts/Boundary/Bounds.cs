@@ -4,10 +4,11 @@ public static class Bounds
     public static float minX;
     public static float maxY;
     public static float minY;
+
 }
 
-public enum Player
+public enum Players
 {
     Alpha = 0,
-    Beta = 1
+    Beta = 1,
 }

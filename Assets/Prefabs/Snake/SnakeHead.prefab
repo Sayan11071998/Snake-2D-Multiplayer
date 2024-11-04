@@ -173,15 +173,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484df487d7565774c858ecf82f21b349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snakeSpeed: 10
+  speed: 0
   player: 0
   UI: {fileID: 0}
-  _snakeSegment: {fileID: 7174606913641072160, guid: d7814328a3d75704fb9f0087320b49e7, type: 3}
-  _initialSegmentCount: 5
+  bodyPart: {fileID: 7174606913641072160, guid: d7814328a3d75704fb9f0087320b49e7, type: 3}
+  initialBodyCount: 5
   upKey: 119
   downKey: 115
   leftKey: 97
-  rightKey: 100
+  rightkey: 100
 --- !u!82 &3243233811418340175
 AudioSource:
   m_ObjectHideFlags: 0
