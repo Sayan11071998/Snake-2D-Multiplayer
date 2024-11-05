@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager s_ManagerInstance;
-    public static GameManager ManagerInstance { get { return s_ManagerInstance; } }
+    private static GameManager instance;
+    public static GameManager Instance { get { return instance; } }
 
     public bool isGameOver;
 
@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         isGameOver = false;
-        s_ManagerInstance = this;
+        instance = this;
         m_collider = GetComponent<BoxCollider2D>();
+
         SetBounds();
         displayBounds();
     }
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
+
         ItemSpwanner.FruitInstance.GameOver();
         PowerUpManager.powerUpInstance.GameOver();
     }

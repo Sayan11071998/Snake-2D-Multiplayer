@@ -45,7 +45,8 @@ public class SnakeController : MonoBehaviour
 
     private void Update()
     {
-        if (_isPaused || GameManager.ManagerInstance.isGameOver)
+        // if (_isPaused || GameManager.ManagerInstance.isGameOver)
+        if (_isPaused || GameManager.Instance.isGameOver)
             return;
 
         GetSnakeDirection();
@@ -238,7 +239,8 @@ public class SnakeController : MonoBehaviour
         {
             _audio.Play(Sounds.Death);
             // StartCoroutine(DeathAnimation());
-            GameManager.ManagerInstance.GameOver();
+            // GameManager.ManagerInstance.GameOver();
+            GameManager.Instance.GameOver();
         }
 
         for (int i = 0; i < count; i++)
@@ -289,12 +291,14 @@ public class SnakeController : MonoBehaviour
         // StartCoroutine(DeathAnimation());
         UIManager.UiInstance.GameOver(_player);
         Destroy(gameObject);
-        GameManager.ManagerInstance.GameOver();
+        // GameManager.ManagerInstance.GameOver();
+        GameManager.Instance.GameOver();
     }
 
     private void AteHead()
     {
-        GameManager.ManagerInstance.Draw();
+        // GameManager.ManagerInstance.Draw();
+        GameManager.Instance.Draw();
         UIManager.UiInstance.Draw();
     }
 

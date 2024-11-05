@@ -40,7 +40,8 @@ public class PowerUpManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.ManagerInstance.isGameOver)
+        // if (GameManager.ManagerInstance.isGameOver)
+        if (GameManager.Instance.isGameOver)
             return;
 
         if (m_Timer > SpawnInterval)
