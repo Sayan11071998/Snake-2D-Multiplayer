@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public enum Sounds
-{
-    Eat = 0,
-    Poison = 1,
-    Death = 3
-}
-
 [RequireComponent(typeof(AudioSource))]
 public class AudioContoller : MonoBehaviour
 {
@@ -42,4 +35,11 @@ public class AudioContoller : MonoBehaviour
         m_Source.pitch = Random.Range(0.95f, 1.1f);
         m_Source.Play();
     }
+}
+
+public enum Sounds
+{
+    Eat = 0,
+    Poison = 1,
+    Death = 3
 }
