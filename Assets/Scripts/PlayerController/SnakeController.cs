@@ -226,6 +226,7 @@ public class SnakeController : MonoBehaviour
     private void UpdateScore(float fruitScore)
     {
         _playerScore += fruitScore;
+        _playerScore = Mathf.Max(0, _playerScore);
         UIManager.Instance.SetScoreUI(_player, _playerScore);
     }
 
@@ -239,6 +240,7 @@ public class SnakeController : MonoBehaviour
             _audio.Play(Sounds.Death);
             // StartCoroutine(DeathAnimation());
             GameManager.Instance.GameOver();
+            return;
         }
 
         for (int i = 0; i < count; i++)
@@ -247,55 +249,51 @@ public class SnakeController : MonoBehaviour
         if (_segments.Count < 3)
             ItemSpwanner.Instance.PoisonActivation(false);
 
-        UpdateScore(-ItemSpwanner.Instance.poisonScore);
+        // UpdateScore(-ItemSpwanner.Instance.poisonScore);
+        UpdateScore(-Mathf.Min(ItemSpwanner.Instance.poisonScore, _playerScore));
     }
-
-    // IEnumerator DeathAnimation()
-    // {
-    //     _isPaused = true;
-    //     float waitTime = 0.1f;
-
-    //     for (int i = _segments.Count - 1; i > 0; i--)
-    //     {
-    //         Destroy(_segments[i].gameObject, waitTime);
-    //         waitTime += 0.05f;
-    //     }
-
-    //     yield return new WaitForSeconds(waitTime);
-    //     _segments.Clear();
-
-    //     UIManager.UiInstance.GameOver(_player);
-
-    //     Destroy(gameObject);
-    // }
 
     private void AteBody()
     {
-        if (_isImmune)
-            return;
+        if (_isImmune) return;
 
         if (_powerUps[(int)PowerUpsItemTypes.shield])
         {
             _powerUps[(int)PowerUpsItemTypes.shield] = false;
             UIManager.Instance.PowerUp(_player, PowerUpsItemTypes.shield, false);
-            StartCoroutine(SetImmunity(1));
+            // StartCoroutine(SetImmunity(1));
             return;
         }
 
         _audio.Play(Sounds.Death);
+        // _playerScore -= 10; // Adjust penalty value as needed
+        _playerScore = Mathf.Max(0, _playerScore - 10);
+        UIManager.Instance.SetScoreUI(_player, _playerScore);
 
-        Debug.Log("Player Dead");
+        // Call the game-over logic
+        CheckGameOver();
 
-        // StartCoroutine(DeathAnimation());
-        UIManager.Instance.GameOver(_player);
-        Destroy(gameObject);
-        GameManager.Instance.GameOver();
+        Debug.Log("Player hit their own body but survived with score penalty.");
     }
 
     private void AteHead()
     {
-        GameManager.Instance.Draw();
-        UIManager.Instance.Draw();
+        _audio.Play(Sounds.Death);
+        // _playerScore -= 10; // Example penalty for hitting another player's head
+        _playerScore = Mathf.Max(0, _playerScore - 10);
+        UIManager.Instance.SetScoreUI(_player, _playerScore);
+
+        // Call the game-over logic
+        CheckGameOver();
+
+        Debug.Log("Player hit another player's head.");
+    }
+
+    private void CheckGameOver()
+    {
+        float scorePlayer1, scorePlayer2;
+        UIManager.Instance.GetScores(out scorePlayer1, out scorePlayer2);
+        UIManager.Instance.CheckGameOver(scorePlayer1, scorePlayer2);
     }
 
     public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
