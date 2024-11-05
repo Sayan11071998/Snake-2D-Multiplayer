@@ -237,7 +237,7 @@ public class SnakeController : MonoBehaviour
         if (_segments.Count < count + 1)
         {
             _audio.Play(Sounds.Death);
-            StartCoroutine(DeathAnimation());
+            // StartCoroutine(DeathAnimation());
             GameManager.ManagerInstance.GameOver();
         }
 
@@ -250,24 +250,24 @@ public class SnakeController : MonoBehaviour
         UpdateScore(-ItemSpwanner.FruitInstance.poisonScore);
     }
 
-    IEnumerator DeathAnimation()
-    {
-        _isPaused = true;
-        float waitTime = 0.1f;
+    // IEnumerator DeathAnimation()
+    // {
+    //     _isPaused = true;
+    //     float waitTime = 0.1f;
 
-        for (int i = _segments.Count - 1; i > 0; i--)
-        {
-            Destroy(_segments[i].gameObject, waitTime);
-            waitTime += 0.05f;
-        }
+    //     for (int i = _segments.Count - 1; i > 0; i--)
+    //     {
+    //         Destroy(_segments[i].gameObject, waitTime);
+    //         waitTime += 0.05f;
+    //     }
 
-        yield return new WaitForSeconds(waitTime);
-        _segments.Clear();
+    //     yield return new WaitForSeconds(waitTime);
+    //     _segments.Clear();
 
-        UIManager.UiInstance.GameOver(_player);
+    //     UIManager.UiInstance.GameOver(_player);
 
-        Destroy(gameObject);
-    }
+    //     Destroy(gameObject);
+    // }
 
     private void AteBody()
     {
