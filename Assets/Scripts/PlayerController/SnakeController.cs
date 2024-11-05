@@ -141,7 +141,7 @@ public class SnakeController : MonoBehaviour
 
     private void MoveSnake()
     {
-        float effectiveSpeed = _speed * ((_powerUps[(int)PowerUps.speedUp]) ? 3 : 1);
+        float effectiveSpeed = _speed * ((_powerUps[(int)PowerUpsItemTypes.speedUp]) ? 3 : 1);
         if (_moveTimer > 1 / effectiveSpeed)
         {
             MoveBody();
@@ -184,12 +184,12 @@ public class SnakeController : MonoBehaviour
             else
                 continue;
 
-            float timePeriod = PowerUpManager.powerUpInstance.getPowerUpPeriod((PowerUps)i);
+            float timePeriod = PowerUpManager.powerUpInstance.GetPowerUpDuration((PowerUpsItemTypes)i);
 
             if (_powerUpTimers[i] > timePeriod)
             {
                 _powerUps[i] = false;
-                UIManager.UiInstance.PowerUp(_player, (PowerUps)i, false);
+                UIManager.UiInstance.PowerUp(_player, (PowerUpsItemTypes)i, false);
                 _powerUpTimers[i] = 0;
             }
         }
@@ -213,7 +213,7 @@ public class SnakeController : MonoBehaviour
     private void AteFruit()
     {
         _audio.Play(Sounds.Eat);
-        int count = ItemSpwanner.FruitInstance.SnakeAteFruit() * ((_powerUps[(int)PowerUps.scoreUp]) ? 2 : 1);
+        int count = ItemSpwanner.FruitInstance.SnakeAteFruit() * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1);
 
         for (int i = 0; i < count; i++)
             AddNewBodySegments();
@@ -221,7 +221,7 @@ public class SnakeController : MonoBehaviour
         if (_segments.Count > 3)
             ItemSpwanner.FruitInstance.PoisonActivation(true);
 
-        UpdateScore(ItemSpwanner.FruitInstance.fruitScore * ((_powerUps[(int)PowerUps.scoreUp]) ? 2 : 1));
+        UpdateScore(ItemSpwanner.FruitInstance.fruitScore * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1));
     }
 
     private void UpdateScore(float fruitScore)
@@ -239,7 +239,6 @@ public class SnakeController : MonoBehaviour
         {
             _audio.Play(Sounds.Death);
             // StartCoroutine(DeathAnimation());
-            // GameManager.ManagerInstance.GameOver();
             GameManager.Instance.GameOver();
         }
 
@@ -276,10 +275,10 @@ public class SnakeController : MonoBehaviour
         if (_isImmune)
             return;
 
-        if (_powerUps[(int)PowerUps.shield])
+        if (_powerUps[(int)PowerUpsItemTypes.shield])
         {
-            _powerUps[(int)PowerUps.shield] = false;
-            UIManager.UiInstance.PowerUp(_player, PowerUps.shield, false);
+            _powerUps[(int)PowerUpsItemTypes.shield] = false;
+            UIManager.UiInstance.PowerUp(_player, PowerUpsItemTypes.shield, false);
             StartCoroutine(SetImmunity(1));
             return;
         }
@@ -291,18 +290,16 @@ public class SnakeController : MonoBehaviour
         // StartCoroutine(DeathAnimation());
         UIManager.UiInstance.GameOver(_player);
         Destroy(gameObject);
-        // GameManager.ManagerInstance.GameOver();
         GameManager.Instance.GameOver();
     }
 
     private void AteHead()
     {
-        // GameManager.ManagerInstance.Draw();
         GameManager.Instance.Draw();
         UIManager.UiInstance.Draw();
     }
 
-    public void ActivatePowerUp(PowerUps power, GameObject powerObject)
+    public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
     {
         _audio.Play(Sounds.Eat);
         Destroy(powerObject);
@@ -338,10 +335,10 @@ public class SnakeController : MonoBehaviour
         }
 
         if (other.CompareTag("Shield"))
-            ActivatePowerUp(PowerUps.shield, other.gameObject);
+            ActivatePowerUp(PowerUpsItemTypes.shield, other.gameObject);
         else if (other.CompareTag("ScoreUp"))
-            ActivatePowerUp(PowerUps.scoreUp, other.gameObject);
+            ActivatePowerUp(PowerUpsItemTypes.scoreUp, other.gameObject);
         else if (other.CompareTag("SpeedUp"))
-            ActivatePowerUp(PowerUps.speedUp, other.gameObject);
+            ActivatePowerUp(PowerUpsItemTypes.speedUp, other.gameObject);
     }
 }

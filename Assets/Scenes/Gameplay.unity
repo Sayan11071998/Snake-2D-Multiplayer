@@ -2535,6 +2535,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerItemSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
+      propertyPath: SpawnInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
+      propertyPath: spawnInterval
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
+      propertyPath: shieldDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
+      propertyPath: scoreUpDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
+      propertyPath: speedUpDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6207074463939313453, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

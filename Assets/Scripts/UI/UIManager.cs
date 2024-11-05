@@ -45,14 +45,14 @@ public class UIManager : MonoBehaviour
         player1Score[index].text = "Score : " + Value;
     }
 
-    public void PowerUp(Players player,PowerUps power, bool active)
+    public void PowerUp(Players player,PowerUpsItemTypes power, bool active)
     {
         int index = (int)player;
-        if(power == PowerUps.shield)
+        if(power == PowerUpsItemTypes.shield)
             shield[index].color = (active)?on:off;
-        else if(power == PowerUps.scoreUp)
+        else if(power == PowerUpsItemTypes.scoreUp)
             score[index].color = (active)?on:off;
-        else if(power == PowerUps.speedUp)
+        else if(power == PowerUpsItemTypes.speedUp)
             speed[index].color = (active)?on:off;
     }
 
