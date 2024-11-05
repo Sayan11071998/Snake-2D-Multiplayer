@@ -37,8 +37,25 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
 
+        StopPlayerMovements();
+        DestroyAllSnakes();
+
         ItemSpwanner.Instance.GameOver();
         PowerUpManager.powerUpInstance.GameOver();
+    }
+
+    private void StopPlayerMovements()
+    {
+        SnakeController[] snakeControllers = FindObjectsOfType<SnakeController>();
+        foreach (var snakeController in snakeControllers)
+            snakeController.enabled = false;
+    }
+
+    private void DestroyAllSnakes()
+    {
+        SnakeController[] snakeControllers = FindObjectsOfType<SnakeController>();
+        foreach (var snakeController in snakeControllers)
+            Destroy(snakeController.gameObject);
     }
 
     public void Draw()

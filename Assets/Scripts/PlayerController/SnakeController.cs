@@ -34,7 +34,6 @@ public class SnakeController : MonoBehaviour
     private void Start()
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
-        // _audio = GetComponent<AudioContoller>();
 
         _rigidBody2D.bodyType = RigidbodyType2D.Kinematic;
         _isPaused = false;
@@ -141,14 +140,14 @@ public class SnakeController : MonoBehaviour
     private void MoveSnake()
     {
         float effectiveSpeed = _speed * ((_powerUps[(int)PowerUpsItemTypes.speedUp]) ? 3 : 1);
-        
+
         if (_moveTimer > 1 / effectiveSpeed)
         {
             MoveBody();
             MoveHead();
             _moveTimer = 0;
         }
-        
+
         _moveTimer += Time.deltaTime;
     }
 
@@ -211,7 +210,6 @@ public class SnakeController : MonoBehaviour
 
     private void AteFruit()
     {
-        // _audio.Play(Sounds.Eat);
         AudioContoller.Instance.PlaySFX(AudioTypeList.FruitEat);
         int count = ItemSpwanner.Instance.SnakeAteFruit() * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1);
 
@@ -233,13 +231,11 @@ public class SnakeController : MonoBehaviour
 
     private void AtePoison()
     {
-        // _audio.Play(Sounds.Poison);
         AudioContoller.Instance.PlaySFX(AudioTypeList.PoisonEat);
         int count = ItemSpwanner.Instance.SnakeAtePoison();
 
         if (_segments.Count < count + 1)
         {
-            // _audio.Play(Sounds.Death);
             AudioContoller.Instance.PlaySFX(AudioTypeList.Death);
             GameManager.Instance.GameOver();
             return;
@@ -265,7 +261,6 @@ public class SnakeController : MonoBehaviour
             return;
         }
 
-        // _audio.Play(Sounds.Death);
         AudioContoller.Instance.PlaySFX(AudioTypeList.Death);
 
         _playerScore = Mathf.Max(0, _playerScore - 10);
@@ -276,7 +271,6 @@ public class SnakeController : MonoBehaviour
 
     private void AteHead()
     {
-        // _audio.Play(Sounds.Death);
         AudioContoller.Instance.PlaySFX(AudioTypeList.Death);
 
         _playerScore = Mathf.Max(0, _playerScore - 10);
@@ -294,12 +288,11 @@ public class SnakeController : MonoBehaviour
 
     public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
     {
-        // _audio.Play(Sounds.Eat);
         AudioContoller.Instance.PlaySFX(AudioTypeList.FruitEat);
-        
+
         Destroy(powerObject);
         UIManager.Instance.PowerUp(_player, power, true);
-        
+
         _powerUps[(int)power] = true;
     }
 

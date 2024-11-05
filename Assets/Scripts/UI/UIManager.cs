@@ -74,11 +74,13 @@ public class UIManager : MonoBehaviour
         
         if (winningPlayer == Players.Alpha)
         {
+            GameManager.Instance.GameOver();
             GameOverPanel.GetComponent<Image>().color = new Color(1f, 0f, 0f, 0.3f);
             GameOverText.text = "Player 1 Wins!";
         }
         else
         {
+            GameManager.Instance.GameOver();
             GameOverPanel.GetComponent<Image>().color = new Color(0f, 1f, 0f, 0.3f);
             GameOverText.text = "Player 2 Wins!";
         }
@@ -86,6 +88,7 @@ public class UIManager : MonoBehaviour
 
     public void Draw()
     {
+        GameManager.Instance.GameOver();
         GameOverPanel.SetActive(true);
         GameOverPanel.GetComponent<Image>().color = new Color(0f, 0f, 1f, 0.3f);
         GameOverText.text = "It's a DRAW!";
