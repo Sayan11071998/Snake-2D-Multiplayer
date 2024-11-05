@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,40 +7,72 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioContoller : MonoBehaviour
 {
-    public AudioClip eat;
-    public AudioClip poison;
-    public AudioClip death;
+    private static AudioContoller instance;
+    public static AudioContoller Instance { get { return instance; } }
 
-    private AudioSource m_Source;
+    public AudioSource audioSourceBGM;
+    public AudioSource audioSourceSFX;
+    public AudioType[] audioList;
 
-    void Awake()
+    public float bgmVolume = 1f;
+    public float sfxVolume = 1f;
+
+    private void Awake()
     {
-        m_Source = GetComponent<AudioSource>();
-        m_Source.playOnAwake = false;
+        instance = this;
     }
 
-    public void Play(Sounds sound)
+    private void Start()
     {
-        switch (sound)
-        {
-            case Sounds.Eat:
-                m_Source.clip = eat;
-                break;
-            case Sounds.Poison:
-                m_Source.clip = poison;
-                break;
-            case Sounds.Death:
-                m_Source.clip = death;
-                break;
-        }
-        m_Source.pitch = Random.Range(0.95f, 1.1f);
-        m_Source.Play();
+        SetGameVolume(0.2f, 0.5f);
+        PlayBGM(global::AudioTypeList.BackGroundMusic);
+    }
+
+    public void SetGameVolume(float bgmVolume, float sfxVolume)
+    {
+        audioSourceBGM.volume = bgmVolume;
+        audioSourceSFX.volume = sfxVolume;
+    }
+
+    public AudioClip GetAudioClip(AudioTypeList audio)
+    {
+        AudioType audioItem = Array.Find(audioList, item => item.audioType == audio);
+
+        if (audioItem != null)
+            return audioItem.audioClip;
+        return null;
+    }
+
+    public void PlayBGM(AudioTypeList audio)
+    {
+        AudioClip clip = GetAudioClip(audio);
+        if (clip == null) return;
+
+        audioSourceBGM.clip = clip;
+        audioSourceBGM.loop = true;
+        audioSourceBGM.Play();
+    }
+
+    public void PlaySFX(AudioTypeList audio)
+    {
+        AudioClip clip = GetAudioClip(audio);
+        if (clip == null) return;
+
+        audioSourceSFX.PlayOneShot(clip);
     }
 }
 
-public enum Sounds
+[Serializable]
+public class AudioType
 {
-    Eat = 0,
-    Poison = 1,
-    Death = 3
+    public AudioTypeList audioType;
+    public AudioClip audioClip;
+}
+
+public enum AudioTypeList
+{
+    FruitEat = 0,
+    PoisonEat = 1,
+    Death = 3,
+    BackGroundMusic = 4
 }
