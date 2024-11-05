@@ -141,12 +141,14 @@ public class SnakeController : MonoBehaviour
     private void MoveSnake()
     {
         float effectiveSpeed = _speed * ((_powerUps[(int)PowerUpsItemTypes.speedUp]) ? 3 : 1);
+        
         if (_moveTimer > 1 / effectiveSpeed)
         {
             MoveBody();
             MoveHead();
             _moveTimer = 0;
         }
+        
         _moveTimer += Time.deltaTime;
     }
 
@@ -154,9 +156,7 @@ public class SnakeController : MonoBehaviour
     {
         int segmentCount = _segments.Count;
         for (int i = segmentCount - 1; i > 0; i--)
-        {
             _segments[i].position = _segments[i - 1].position;
-        }
     }
 
     private void MoveHead()
@@ -194,12 +194,12 @@ public class SnakeController : MonoBehaviour
         }
     }
 
-    private void CheckBoundary(ref Vector3 pos)
+    private void CheckBoundary(ref Vector3 position)
     {
-        if (pos.x > Bounds.maxX || pos.x < Bounds.minX)
-            pos.x = ((pos.x > 0) ? Bounds.minX : Bounds.maxX);
-        else if (pos.y > Bounds.maxY || pos.y < Bounds.minY)
-            pos.y = ((pos.y > 0) ? Bounds.minY : Bounds.maxY);
+        if (position.x > Bounds.maxX || position.x < Bounds.minX)
+            position.x = ((position.x > 0) ? Bounds.minX : Bounds.maxX);
+        else if (position.y > Bounds.maxY || position.y < Bounds.minY)
+            position.y = ((position.y > 0) ? Bounds.minY : Bounds.maxY);
     }
 
     private void DestoryLastBody()
@@ -238,7 +238,6 @@ public class SnakeController : MonoBehaviour
         if (_segments.Count < count + 1)
         {
             _audio.Play(Sounds.Death);
-            // StartCoroutine(DeathAnimation());
             GameManager.Instance.GameOver();
             return;
         }
@@ -249,7 +248,6 @@ public class SnakeController : MonoBehaviour
         if (_segments.Count < 3)
             ItemSpwanner.Instance.PoisonActivation(false);
 
-        // UpdateScore(-ItemSpwanner.Instance.poisonScore);
         UpdateScore(-Mathf.Min(ItemSpwanner.Instance.poisonScore, _playerScore));
     }
 
@@ -261,32 +259,25 @@ public class SnakeController : MonoBehaviour
         {
             _powerUps[(int)PowerUpsItemTypes.shield] = false;
             UIManager.Instance.PowerUp(_player, PowerUpsItemTypes.shield, false);
-            // StartCoroutine(SetImmunity(1));
             return;
         }
 
         _audio.Play(Sounds.Death);
-        // _playerScore -= 10; // Adjust penalty value as needed
+
         _playerScore = Mathf.Max(0, _playerScore - 10);
         UIManager.Instance.SetScoreUI(_player, _playerScore);
 
-        // Call the game-over logic
         CheckGameOver();
-
-        Debug.Log("Player hit their own body but survived with score penalty.");
     }
 
     private void AteHead()
     {
         _audio.Play(Sounds.Death);
-        // _playerScore -= 10; // Example penalty for hitting another player's head
+
         _playerScore = Mathf.Max(0, _playerScore - 10);
         UIManager.Instance.SetScoreUI(_player, _playerScore);
 
-        // Call the game-over logic
         CheckGameOver();
-
-        Debug.Log("Player hit another player's head.");
     }
 
     private void CheckGameOver()
@@ -299,8 +290,10 @@ public class SnakeController : MonoBehaviour
     public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
     {
         _audio.Play(Sounds.Eat);
+        
         Destroy(powerObject);
         UIManager.Instance.PowerUp(_player, power, true);
+        
         _powerUps[(int)power] = true;
     }
 

@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         playerScore[0].text = "Score: " + 0;
         playerScore[1].text = "Score: " + 0;
+        
         DeactivateALlPowerUp();
     }
 
@@ -70,6 +71,7 @@ public class UIManager : MonoBehaviour
     public void GameOver(Players winningPlayer)
     {
         GameOverPanel.SetActive(true);
+        
         if (winningPlayer == Players.Alpha)
         {
             GameOverPanel.GetComponent<Image>().color = new Color(1f, 0f, 0f, 0.3f);
@@ -94,17 +96,11 @@ public class UIManager : MonoBehaviour
         if (scorePlayer1 == 0 || scorePlayer2 == 0)
         {
             if (scorePlayer1 > scorePlayer2)
-            {
                 GameOver(Players.Alpha);
-            }
             else if (scorePlayer2 > scorePlayer1)
-            {
-                GameOver(Players.Beta); // Change 'Beta' to the actual name of the second player enum if different
-            }
+                GameOver(Players.Beta);
             else
-            {
                 Draw();
-            }
         }
     }
 
@@ -113,7 +109,6 @@ public class UIManager : MonoBehaviour
         scorePlayer1 = float.Parse(playerScore[0].text.Split(':')[1].Trim());
         scorePlayer2 = float.Parse(playerScore[1].text.Split(':')[1].Trim());
     }
-
 
     public void RestartGame()
     {
