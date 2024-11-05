@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     {
         playerScore[0].text = "Score: " + 0;
         playerScore[1].text = "Score: " + 0;
-        
+
         DeactivateALlPowerUp();
     }
 
@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
     public void GameOver(Players winningPlayer)
     {
         GameOverPanel.SetActive(true);
-        
+
         if (winningPlayer == Players.Alpha)
         {
             GameManager.Instance.GameOver();
@@ -115,7 +115,8 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
+        // SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void MainMenu()
