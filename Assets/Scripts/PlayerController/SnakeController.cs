@@ -23,7 +23,7 @@ public class SnakeController : MonoBehaviour
 
     private Vector3 _direction;
     private Rigidbody2D _rigidBody2D;
-    private AudioContoller _audio;
+    private SpriteRenderer _headSprite;
     private List<Transform> _segments;
     private float _moveTimer = 0;
     private bool _isVertical, _isPaused, _isImmune;
@@ -34,6 +34,7 @@ public class SnakeController : MonoBehaviour
     private void Start()
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
+        _headSprite = GetComponent<SpriteRenderer>();
 
         _rigidBody2D.bodyType = RigidbodyType2D.Kinematic;
         _isPaused = false;
@@ -128,13 +129,49 @@ public class SnakeController : MonoBehaviour
     private void GetSnakeDirection()
     {
         if (Input.GetKeyDown(upKey) && !_isVertical)
+        {
             _direction = Vector3.up;
+            FlipSnakeSprite();
+        }
         else if (Input.GetKeyDown(downKey) && !_isVertical)
+        {
             _direction = Vector3.down;
+            FlipSnakeSprite();
+        }
         else if (Input.GetKeyDown(leftKey) && _isVertical)
+        {
             _direction = Vector3.left;
+            FlipSnakeSprite();
+        }
         else if (Input.GetKeyDown(rightkey) && _isVertical)
+        {
             _direction = Vector3.right;
+            FlipSnakeSprite();
+        }
+    }
+
+    private void FlipSnakeSprite()
+    {
+        if (_direction == Vector3.left)
+            _headSprite.transform.rotation = Quaternion.Euler(0, 0, 180);
+        else if (_direction == Vector3.right)
+            _headSprite.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else if (_direction == Vector3.up)
+            _headSprite.transform.rotation = Quaternion.Euler(0, 0, 90);
+        else if (_direction == Vector3.down)
+            _headSprite.transform.rotation = Quaternion.Euler(0, 0, 270);
+
+        if (_player == Players.Beta)
+        {
+            if (_direction == Vector3.left)
+                _headSprite.transform.rotation = Quaternion.Euler(0, 0, 180);
+            else if (_direction == Vector3.right)
+                _headSprite.transform.rotation = Quaternion.Euler(0, 0, 0);
+            else if (_direction == Vector3.up)
+                _headSprite.transform.rotation = Quaternion.Euler(0, 0, 90);
+            else if (_direction == Vector3.down)
+                _headSprite.transform.rotation = Quaternion.Euler(0, 0, 270);
+        }
     }
 
     private void MoveSnake()
