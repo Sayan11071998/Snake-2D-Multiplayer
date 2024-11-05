@@ -213,15 +213,15 @@ public class SnakeController : MonoBehaviour
     private void AteFruit()
     {
         _audio.Play(Sounds.Eat);
-        int count = ItemSpwanner.FruitInstance.SnakeAteFruit() * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1);
+        int count = ItemSpwanner.Instance.SnakeAteFruit() * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1);
 
         for (int i = 0; i < count; i++)
             AddNewBodySegments();
 
         if (_segments.Count > 3)
-            ItemSpwanner.FruitInstance.PoisonActivation(true);
+            ItemSpwanner.Instance.PoisonActivation(true);
 
-        UpdateScore(ItemSpwanner.FruitInstance.fruitScore * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1));
+        UpdateScore(ItemSpwanner.Instance.fruitScore * ((_powerUps[(int)PowerUpsItemTypes.scoreUp]) ? 2 : 1));
     }
 
     private void UpdateScore(float fruitScore)
@@ -233,7 +233,7 @@ public class SnakeController : MonoBehaviour
     private void AtePoison()
     {
         _audio.Play(Sounds.Poison);
-        int count = ItemSpwanner.FruitInstance.SnakeAtePoison();
+        int count = ItemSpwanner.Instance.SnakeAtePoison();
 
         if (_segments.Count < count + 1)
         {
@@ -246,9 +246,9 @@ public class SnakeController : MonoBehaviour
             DestoryLastBody();
 
         if (_segments.Count < 3)
-            ItemSpwanner.FruitInstance.PoisonActivation(false);
+            ItemSpwanner.Instance.PoisonActivation(false);
 
-        UpdateScore(-ItemSpwanner.FruitInstance.poisonScore);
+        UpdateScore(-ItemSpwanner.Instance.poisonScore);
     }
 
     // IEnumerator DeathAnimation()
