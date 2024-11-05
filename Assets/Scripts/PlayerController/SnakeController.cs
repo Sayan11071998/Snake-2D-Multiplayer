@@ -45,8 +45,7 @@ public class SnakeController : MonoBehaviour
 
     private void Update()
     {
-        // if (_isPaused || GameManager.ManagerInstance.isGameOver)
-        if (_isPaused || GameManager.Instance.isGameOver)
+        if (_isPaused || GameManager.Instance._isGameOver)
             return;
 
         GetSnakeDirection();

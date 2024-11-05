@@ -32,7 +32,7 @@ public class ItemSpwanner : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.isGameOver)
+        if (GameManager.Instance._isGameOver)
             return;
 
         Spawn();
