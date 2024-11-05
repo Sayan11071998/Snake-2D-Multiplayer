@@ -189,7 +189,7 @@ public class SnakeController : MonoBehaviour
             if (_powerUpTimers[i] > timePeriod)
             {
                 _powerUps[i] = false;
-                UIManager.UiInstance.PowerUp(_player, (PowerUpsItemTypes)i, false);
+                UIManager.Instance.PowerUp(_player, (PowerUpsItemTypes)i, false);
                 _powerUpTimers[i] = 0;
             }
         }
@@ -227,7 +227,7 @@ public class SnakeController : MonoBehaviour
     private void UpdateScore(float fruitScore)
     {
         _playerScore += fruitScore;
-        UIManager.UiInstance.SetScoreUI(_player, _playerScore);
+        UIManager.Instance.SetScoreUI(_player, _playerScore);
     }
 
     private void AtePoison()
@@ -278,7 +278,7 @@ public class SnakeController : MonoBehaviour
         if (_powerUps[(int)PowerUpsItemTypes.shield])
         {
             _powerUps[(int)PowerUpsItemTypes.shield] = false;
-            UIManager.UiInstance.PowerUp(_player, PowerUpsItemTypes.shield, false);
+            UIManager.Instance.PowerUp(_player, PowerUpsItemTypes.shield, false);
             StartCoroutine(SetImmunity(1));
             return;
         }
@@ -288,7 +288,7 @@ public class SnakeController : MonoBehaviour
         Debug.Log("Player Dead");
 
         // StartCoroutine(DeathAnimation());
-        UIManager.UiInstance.GameOver(_player);
+        UIManager.Instance.GameOver(_player);
         Destroy(gameObject);
         GameManager.Instance.GameOver();
     }
@@ -296,14 +296,14 @@ public class SnakeController : MonoBehaviour
     private void AteHead()
     {
         GameManager.Instance.Draw();
-        UIManager.UiInstance.Draw();
+        UIManager.Instance.Draw();
     }
 
     public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
     {
         _audio.Play(Sounds.Eat);
         Destroy(powerObject);
-        UIManager.UiInstance.PowerUp(_player, power, true);
+        UIManager.Instance.PowerUp(_player, power, true);
         _powerUps[(int)power] = true;
     }
 

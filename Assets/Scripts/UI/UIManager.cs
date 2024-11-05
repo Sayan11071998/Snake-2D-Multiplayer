@@ -8,41 +8,41 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    private static UIManager s_UiInstance;
-    public static UIManager UiInstance { get { return s_UiInstance; } }
+    private static UIManager instance;
+    public static UIManager Instance { get { return instance; } }
 
 
-    [Header("Player")]
+    [Header("Player Details")]
     public Image[] shield;
     public Image[] score;
     public Image[] speed;
-    public TMP_Text[] player1Score;
+    public TMP_Text[] playerScore;
 
     [Space]
     public GameObject GameOverPanel;
-    public TMP_Text gameOverText;
+    public TMP_Text GameOverText;
 
     private Color on = new Color(1f,1f,1f,1f);
     private Color off = new Color(1f,1f,1f,0.5f);
 
     void Awake()
     {
-        s_UiInstance = this;
+        instance = this;
         GameOverPanel.SetActive(false);
         InstantiatePlayerUI();
     }
 
     private void InstantiatePlayerUI()
     {
-        player1Score[0].text = "Score : " + 0;
-        player1Score[1].text = "Score : " + 0;
+        playerScore[0].text = "Score : " + 0;
+        playerScore[1].text = "Score : " + 0;
         DeactivateALlPowerUp();
     }
 
     public void SetScoreUI(Players player, float Value)
     {
         int index = (int)player;
-        player1Score[index].text = "Score : " + Value;
+        playerScore[index].text = "Score : " + Value;
     }
 
     public void PowerUp(Players player,PowerUpsItemTypes power, bool active)
@@ -72,12 +72,12 @@ public class UIManager : MonoBehaviour
         if(player == Players.Alpha)
 		{
             GameOverPanel.GetComponent<Image>().color = new Color(1f, 0f, 0f, 0.3f);
-            gameOverText.text = "Player 2 Wins";
+            GameOverText.text = "Player 2 Wins";
 		}
 		else
 		{
             GameOverPanel.GetComponent<Image>().color = new Color(0f, 1f, 0f, 0.3f);
-            gameOverText.text = "Player 1 Wins";
+            GameOverText.text = "Player 1 Wins";
         }
 	}
 
@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
 	{
         GameOverPanel.SetActive(true);
         GameOverPanel.GetComponent<Image>().color = new Color(0f, 0f, 1f, 0.3f);
-        gameOverText.text = "DRAW";
+        GameOverText.text = "DRAW";
     }
 
     public void RestartGame()

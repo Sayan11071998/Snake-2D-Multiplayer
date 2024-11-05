@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitPrefab: {fileID: 4770517565515169568, guid: 63926e35fd442fc4398352f5c641c376, type: 3}
-  fruitValue: 10
+  fruitValue: 1
   fruitSpawnInterval: 5
   fruitScore: 10
-  poisonPrefab: {fileID: 0}
-  poisonValue: 5
-  poisonSpawnInterval: 15
-  poisonEffectTime: 5
+  poisonPrefab: {fileID: 2142574163392667929, guid: 5768cdb3567e2f9418a15a2666d795a8, type: 3}
+  poisonValue: 1
+  poisonSpawnInterval: 7
+  poisonStayTime: 10
   poisonScore: 5

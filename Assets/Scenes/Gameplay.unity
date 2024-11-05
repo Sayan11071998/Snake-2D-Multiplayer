@@ -247,11 +247,11 @@ MonoBehaviour:
   speed:
   - {fileID: 74758388}
   - {fileID: 124141010}
-  player1Score:
+  playerScore:
   - {fileID: 1951512517}
   - {fileID: 1281154451}
   GameOverPanel: {fileID: 889439966}
-  gameOverText: {fileID: 510662444}
+  GameOverText: {fileID: 510662444}
 --- !u!1 &74758386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,26 +2535,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerItemSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
-      propertyPath: SpawnInterval
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
-      propertyPath: spawnInterval
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
-      propertyPath: shieldDuration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
-      propertyPath: scoreUpDuration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501013801366313082, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
-      propertyPath: speedUpDuration
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6207074463939313453, guid: e235d2c48b84d3348819f87cb674c425, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2652,34 +2632,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: fruit
-      value: 
-      objectReference: {fileID: 4770517565515169568, guid: 63926e35fd442fc4398352f5c641c376, type: 3}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: fruitValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: poisonValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: poisonPrefab
-      value: 
-      objectReference: {fileID: 2142574163392667929, guid: 5768cdb3567e2f9418a15a2666d795a8, type: 3}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: poisonStayTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: fruitSpawnInterval
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064545728878186112, guid: 7ec5085edd5860b449a288a79b91e0a6, type: 3}
-      propertyPath: poisonSpawnInterval
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2696,10 +2648,6 @@ PrefabInstance:
     - target: {fileID: 4871563795337324043, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5070628877909718950, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
-      propertyPath: isGameOver
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138719263504878343, guid: 9bfc867ba03b0784fa8250e2e11379ce, type: 3}
       propertyPath: m_LocalPosition.x

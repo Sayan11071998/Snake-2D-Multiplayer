@@ -90,4 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1166dc59c7e7b408dbf4d9cc4394f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGameOver: 0
+  isGameOver: 0
