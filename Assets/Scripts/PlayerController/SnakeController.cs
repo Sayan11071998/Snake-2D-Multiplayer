@@ -288,7 +288,7 @@ public class SnakeController : MonoBehaviour
 
     public void ActivatePowerUp(PowerUpsItemTypes power, GameObject powerObject)
     {
-        AudioContoller.Instance.PlaySFX(AudioTypeList.FruitEat);
+        AudioContoller.Instance.PlaySFX(AudioTypeList.PowerUpEat);
 
         Destroy(powerObject);
         UIManager.Instance.PowerUp(_player, power, true);

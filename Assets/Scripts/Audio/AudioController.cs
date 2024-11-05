@@ -73,6 +73,7 @@ public enum AudioTypeList
 {
     FruitEat = 0,
     PoisonEat = 1,
+    PowerUpEat = 2,
     Death = 3,
     BackGroundMusic = 4
 }
