@@ -25,3 +25,9 @@ I’m super excited to share my latest Unity project—a 2D multiplayer twist on
 - **🤝 Hands-On with Multiplayer Systems:** Developing penalty systems and head-to-head collisions was an eye-opener into multiplayer game design—and yes, it’s just as intense as it sounds.
 
 This project taught me invaluable lessons in game mechanics, Unity UI, and multiplayer interactions. Big thanks to everyone who gave feedback and playtested along the way! Looking forward to bringing more games (and probably some quirky bugs) to life soon. 🕹️
+
+![Snake2DMultiplayer_01](https://github.com/user-attachments/assets/b4f7f169-a3a3-4b76-b96c-211b08161c25)
+
+![Snake2DMultiplayer_02](https://github.com/user-attachments/assets/0db201f0-28aa-47ba-81cc-dfca4f911913)
+
+![Snake2DMultiplayer_03](https://github.com/user-attachments/assets/29fb002a-07d1-4d08-8c51-a69da5664b9a)
