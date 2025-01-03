@@ -16,7 +16,7 @@ I’m super excited to share my latest Unity project—a 2D multiplayer twist on
 - **📋 Game Menus and Control:** Created polished Main Menu and Game Over scenes, where you can reflect on your amazing gameplay decisions.
 - **🎶 Audio and Game Management with Singleton:** Used the Singleton pattern to manage background music and sound effects—because silence is only golden until it’s awkward.
 
-🌟 Takeaways and Growth:
+### *🌟 Takeaways and Growth:*
 - **📈 Unity and C# Skills:** Improved my C# programming, especially in custom scripting. Now I officially know more about scripting snakes than I ever thought I would.
 - **🧠 Problem-Solving Skills:** Customizing snake movement and creating dual player controls tested my logic and scripting—who knew guiding a snake around could be such a brain teaser?
 - **🗃️ Efficient Code Management:** Mastered the Singleton pattern to keep scripts organized and my sanity intact (mostly).
