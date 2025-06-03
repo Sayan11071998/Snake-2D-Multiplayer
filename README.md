@@ -67,6 +67,11 @@
 
 **Snake-2D Multiplayer** challenged and sharpened my skills across game mechanics, UI, and systems architecture. It brought a nostalgic concept into a new space with engaging features and real-time interaction. I’m excited to continue building on these experiences in future game development projects.
 
+---
+
+## Play Link
+https://sayannandi.itch.io/snake-2d-multiplayer
+
 [![Watch the video](https://img.youtube.com/vi/4RpwhrWOcO8/maxresdefault.jpg)](https://youtu.be/4RpwhrWOcO8)
 ### [Gameplay Video](https://youtu.be/4RpwhrWOcO8)
 
