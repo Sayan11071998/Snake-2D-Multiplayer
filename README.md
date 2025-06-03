@@ -6,66 +6,66 @@
 
 ## Game Features
 
-### Custom Snake Movement  
-Implemented smooth directional controls using Rigidbody2D in Kinematic mode, ensuring responsive and fluid movement in all directions.
+- **Custom Snake Movement**  
+  Smooth directional control using Rigidbody2D in Kinematic mode for responsive, fluid movement.
 
-### Two-Player Input System  
-Developed a simultaneous input system for two players, allowing for competitive multiplayer gameplay on a shared screen.
+- **Two-Player Input System**  
+  Simultaneous input logic allows two players to compete head-to-head in real time.
 
-### Classic Snake Mechanics  
-Preserved the traditional "eat to grow" mechanic while adapting it for modern visuals and real-time competition.
+- **Classic Snake Mechanics**  
+  Integrated the timeless "eat to grow" system with modern enhancements.
 
-### Snake Prefabs & Animations  
-Created modular snake prefabs that dynamically rotate and flip based on input, enhancing visual feedback and improving animation flow.
+- **Snake Prefabs & Animations**  
+  Directional flipping and rotation bring life to every movement and reduce animation jitter.
 
-### Snake Type Customization  
-Used enumerations to define unique snake types with distinct colors and movement patterns, helping differentiate players during fast-paced gameplay.
+- **Snake Type Customization**  
+  Defined two snake types using Enums for unique colors, identifiers, and movement behaviors.
 
-### Power-Ups and Visual Effects  
-Introduced power-up mechanics such as temporary immunity and speed boosts, complete with visual indicators to keep players informed mid-match.
+- **Power-Ups and Visual Effects**  
+  Added power-up items (e.g., immunity, speed boost) with animated feedback and VFX triggers.
 
-### Multiplayer Penalty System  
-Added body and head-to-head collision penalties. Score reductions and player eliminations introduce stakes and encourage tactical play.
+- **Multiplayer Penalty System**  
+  Body collisions reduce score; head-on collisions result in instant elimination.
 
-### Boundary Looping  
-Implemented screen-wrapping to allow snakes to seamlessly travel across screen edges, maintaining tension and unpredictability in gameplay.
+- **Boundary Looping**  
+  Screen edge teleportation enables continuous motion and surprise strategic comebacks.
 
-### Score and Health UI  
-Built a dynamic UI system to track player health and scores in real-time, supporting transparency and competition.
+- **Score and Health UI**  
+  Real-time tracking of each player's score and health with intuitive UI layout.
 
-### Game Menus and Scene Control  
-Designed and programmed a main menu, in-game UI, and Game Over screens to manage the full player experience from start to finish.
+- **Game Menus and Scene Control**  
+  Functional main menu, in-game interface, and Game Over screen for full-game navigation.
 
-### Audio & Singleton Management  
-Applied the Singleton pattern to manage background music, sound effects, and global game states, improving performance and code organization.
+- **Audio & Singleton Management**  
+  Singleton pattern manages background music, SFX, and global game state efficiently.
 
 ---
 
 ## Key Learnings
 
 - **Unity & C# Proficiency**  
-  Deepened understanding of Unity scripting, particularly in handling Rigidbody2D, UI systems, and event-driven interactions.
+  Improved custom scripting skills, especially in input handling, object pooling, and UI logic.
 
 - **Custom Input & Movement Systems**  
-  Built custom logic for precise player input handling, testing critical thinking around object control and collision responses.
+  Developed real-time controls with smooth, reliable movement for both players.
 
 - **UI/UX Design**  
-  Focused on delivering a clean and informative user interface to enhance the multiplayer experience.
+  Emphasized clarity and usability in score tracking and player feedback systems.
 
 - **Code Architecture**  
-  Leveraged design patterns like Singleton to maintain clean, reusable, and efficient code structures across gameplay systems.
+  Applied Singleton and modular prefab design for scalability and maintenance.
 
 - **Gameplay Design & Feedback Loops**  
-  Explored how power-ups, penalties, and screen-looping mechanics can reshape the feel of a classic game and increase replayability.
+  Enhanced the player experience with layered systems like power-ups and penalties.
 
 - **Multiplayer Interaction**  
-  Designed and tested real-time multiplayer mechanics, balancing fun and fairness through game logic and collision rules.
+  Gained practical insight into balancing fairness and competitiveness in multiplayer logic.
 
 ---
 
 ## Conclusion
 
-**Snake-2D Multiplayer** was an insightful and rewarding project that merged nostalgic gameplay with modern design principles. It challenged my scripting skills, tested my understanding of multiplayer dynamics, and emphasized the importance of user experience. I’m excited to take these lessons forward into future Unity projects.
+**Snake-2D Multiplayer** challenged and sharpened my skills across game mechanics, UI, and systems architecture. It brought a nostalgic concept into a new space with engaging features and real-time interaction. I’m excited to continue building on these experiences in future game development projects.
 
 [![Watch the video](https://img.youtube.com/vi/4RpwhrWOcO8/maxresdefault.jpg)](https://youtu.be/4RpwhrWOcO8)
 ### [Gameplay Video](https://youtu.be/4RpwhrWOcO8)
